@@ -1,3 +1,12 @@
+/***************************
+Student Number : 040100411
+Student Name   : İlker Kesen
+Course         : BLG252E
+CRN            : 11694
+Term           : 2015-Fall
+Homework       : #1
+***************************/
+
 #include <iostream>
 #include <fstream>
 
@@ -7,6 +16,8 @@
 
 using namespace std;
 
+
+// matrix class
 class Matrix {
     public:
         Matrix();
@@ -23,19 +34,24 @@ class Matrix {
         bool test_stochastic(void);
 };
 
-int main()
+
+// main program
+int main(int argc, char *argv[])
 {
+    // variable declarations
     int i, j, k, rows, cols, size;
     float data[MAXROWS][MAXCOLS];
     Matrix Mat[MAXSIZE];
     Matrix Result1, Result2;
 
+    // open file
     ifstream file("MATRICES.TXT");
     if (!file.is_open()) {
         cout << "File cannot be opened." << endl;
         return 0;
     } 
 
+    // read file
     for (k = 0; !file.eof(); k++) {
         file >> rows;
         file >> cols;
@@ -52,17 +68,21 @@ int main()
     size = k;
     file.close();
 
+    // Mat[0] + Mat[2]
     cout << "Result1 Matrix" << endl;
     Result1 = Mat[0] + Mat[2];
     Result1.print();
 
+    // Mat[4] + 70
     cout << "Result2 Matrix" << endl;
     Result2 = Mat[4] + 70;
     Result2.print();
 
+    // other operations
     ++Mat[2];
     Mat[3] += Mat[1];
 
+    // print all matrices
     for (k = 0; k < size; k++) {
         cout << "Matrix #" << k << endl;
         Mat[k].print();
@@ -71,6 +91,8 @@ int main()
     return 0;
 }
 
+
+// matrix constructor with no parameters
 Matrix::Matrix()
 {
     int i, j;
@@ -81,6 +103,8 @@ Matrix::Matrix()
     }   
 }
 
+
+// matrix constructor with parameters
 Matrix::Matrix(float data[MAXROWS][MAXCOLS], int rows, int cols)
 {
     this->rows = rows;
@@ -94,6 +118,8 @@ Matrix::Matrix(float data[MAXROWS][MAXCOLS], int rows, int cols)
     }
 }
 
+
+// matrix stochastic test method
 bool Matrix::test_stochastic(void)
 {
     if (rows != cols)
@@ -115,6 +141,8 @@ bool Matrix::test_stochastic(void)
     return true;
 }
 
+
+// print matrix elements
 void Matrix::print(void)
 {
     int i, j;
@@ -131,6 +159,8 @@ void Matrix::print(void)
     cout << "==============================" << endl;
 }
 
+
+// adds two matrices by overloading operator+
 Matrix Matrix::operator+(const Matrix& b)
 {
     if (this->rows != b.rows || this->cols != b.cols) {
@@ -149,6 +179,8 @@ Matrix Matrix::operator+(const Matrix& b)
     return Matrix(data_new, rows, cols);    
 }
 
+
+// adds matrix and scalar by overloading operator+
 Matrix Matrix::operator+(float scalar_value)
 {
     float data_new[MAXROWS][MAXCOLS];
@@ -163,6 +195,8 @@ Matrix Matrix::operator+(float scalar_value)
     return Matrix(data_new, rows, cols);
 }
 
+
+// increments all the elements by 1
 void Matrix::operator++(void)
 {
     int i, j;
@@ -171,10 +205,14 @@ void Matrix::operator++(void)
             this->data[i][j] += 1;
 }
 
+
+// adds two matrices and writes result to first matrix
 void Matrix::operator+=(const Matrix& b)
 {
-    if (this->rows != rows || this->cols != cols)
+    if (this->rows != rows || this->cols != cols) {
         cout << "Operation cannot be performed because of dimension inequality." << endl;
+        return;
+    }
 
     int i, j;
     for (i = 0; i < rows; i++)
