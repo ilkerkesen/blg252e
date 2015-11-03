@@ -88,6 +88,9 @@ int main(int argc, char *argv[])
         Mat[k].print();
     }
 
+    // prevent sudden termination on Windows
+    cout << "Press enter to exit..." << endl;
+    int ch = cin.get();
     return 0;
 }
 
