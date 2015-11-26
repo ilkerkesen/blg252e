@@ -72,12 +72,16 @@ int main(int argc, char** argv)
         return -1;
     }
 
-    for (int i = 0; !file.eof(); i++) {
+    for (int i = 0; ; i++) {
         file >> subscriber_type;
         file >> ID;
         file >> fname;
         file >> lname;
         file >> consumption;
+
+        // it is more stable to check end of file after reading
+        if (file.eof())
+            break;
 
         if (subscriber_type == "S") {
             file >> institution;
