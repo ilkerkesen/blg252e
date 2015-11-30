@@ -72,16 +72,24 @@ int main(int argc, char** argv)
         return -1;
     }
 
-    for (int i = 0; ; i++) {
+    for (int i = 0; !file.eof(); i++) {
         file >> subscriber_type;
-        file >> ID;
-        file >> fname;
-        file >> lname;
-        file >> consumption;
+        if (file.eof()) break;
 
-        // it is more stable to check end of file after reading
-        if (file.eof())
-            break;
+        file >> ID;
+        if (file.eof()) break;
+
+        file >> fname;
+        if (file.eof()) break;
+
+        file >> lname;
+        if (file.eof()) break;
+
+        // check after all data reads, except the last one.
+        // actually, only one condition at for statement should be enough.
+        // however, last entry is read twice. so, I added extra controls.
+        // why? because of extra spaces at the end of the input file.
+        file >> consumption;
 
         if (subscriber_type == "S") {
             file >> institution;
