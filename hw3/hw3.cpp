@@ -4,7 +4,7 @@ Student Name   : Ilker Kesen
 Course         : BLG252E
 CRN            : 11694
 Term           : 2015-Fall
-Homework       : #2
+Homework       : #3
 ***************************/
 
 #include <iostream>
