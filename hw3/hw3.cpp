@@ -18,9 +18,8 @@ Homework       : #3
 #define CITIES_FILE "CITIES.TXT"
 #define LINES_FILE "LINES.TXT"
 
-// exception codes
-
 using namespace std;
+
 
 // CityDistance struct
 struct CityDistance {
@@ -41,6 +40,7 @@ class Line {
         int average_speed;
 };
 
+
 map<int, string> cities;
 
 int main(int argc, char** argv)
@@ -52,7 +52,8 @@ int main(int argc, char** argv)
 
         // cities file reading process
         ifstream cities_file(CITIES_FILE);
-        if (!cities_file.is_open()) throw "CITIES.TXT cannot be opened.";
+        if (!cities_file.is_open())
+            throw "CITIES.TXT cannot be opened.";
 
         for (;!cities_file.eof();) {
             cities_file >> city_code;
@@ -64,7 +65,8 @@ int main(int argc, char** argv)
 
         // lines file reading process
         ifstream lines_file(LINES_FILE);
-        if (!lines_file.is_open()) throw "LINES.TXT cannot be opened.";
+        if (!lines_file.is_open())
+            throw "LINES.TXT cannot be opened.";
         
         for (;!lines_file.eof();) {
             int line_code, cities_length;
@@ -111,7 +113,8 @@ int main(int argc, char** argv)
         cout << endl << "Enter Line Code : ";
         cin >> line_code;
 
-        if (cin.fail()) throw "Invalid line_code.";
+        if (cin.fail())
+            throw "Invalid line_code.";
 
         bool found = false;
         int k = 0;
@@ -156,9 +159,6 @@ int main(int argc, char** argv)
         cout << "Exception: " << exception << endl;
     }
 
-    // prevent sudden termination on Windows
-    cout << "Press enter to exit..." << endl;
-    int ch = cin.get();
     return 0;
 }
 
