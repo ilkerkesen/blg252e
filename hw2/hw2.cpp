@@ -159,7 +159,6 @@ int main(int argc, char** argv)
     }
     cout << endl;
 
-
     // close file and deallocate memory
     file.close();
     for (int i = 0; subscribers[i] != NULL; i++) {
