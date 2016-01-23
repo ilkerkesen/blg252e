@@ -235,9 +235,17 @@ void Line::print_schedule(int start_city_code, int end_city_code)
         total_hours += duration;
         total_distance += line_cities[i+1].city_distance;
 
+        int start_hour = (hour % 24 == 0) ? 24 : hour % 24;
+        int end_hour = ((hour + duration) % 24 == 0) ? 24 : (hour + duration) % 24;
+
         ostringstream dt, at;
-        dt << ((hour % 24 == 0) ? 24 : hour % 24) << ":00";
-        at << (((hour + duration) % 24 == 0) ? 24 : (hour + duration) % 24) << ":00";
+        if (start_hour < 10)
+            dt << "0";
+        if (end_hour < 10)
+            at << "0";
+
+        dt << start_hour << ":00";
+        at << end_hour << ":00";
         hour = (hour + duration + 1) % 24;
 
         cout << left << setw(16) << cities[line_cities[i].city_code];
